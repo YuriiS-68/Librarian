@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class Demo {
     public static void main(String[] args)throws Exception {
-        LibrarianDAO librarianDAO = new LibrarianDAO();
+        BookDAO bookDAO = new BookDAO();
 
         Book book1 = new Book(1, "909", "name1", "author1", "publisher1", 01, 05, new Date());
         Book book2 = new Book(2, "909", "name2", "author2", "publisher2", 01, 05, new Date());
@@ -18,22 +18,19 @@ public class Demo {
         Book book9 = new Book(9, "909", "name9", "author9", "publisher9", 01, 05, new Date());
         Book book10 = new Book(10, "909", "name10", "author10", "publisher10", 01, 05, new Date());
 
-        librarianDAO.addBookInLibrarian(book1);
-        librarianDAO.addBookInLibrarian(book2);
-        librarianDAO.addBookInLibrarian(book3);
-        librarianDAO.addBookInLibrarian(book4);
-        librarianDAO.addBookInLibrarian(book5);
-        librarianDAO.addBookInLibrarian(book6);
-        librarianDAO.addBookInLibrarian(book7);
-        librarianDAO.addBookInLibrarian(book8);
-        librarianDAO.addBookInLibrarian(book9);
-        //librarianDAO.addBookInLibrarian(book10);
-        librarianDAO.addBookInLibrarian(book10);
-        System.out.println(Arrays.toString(librarianDAO.viewBook()));
+        bookDAO.addBookInLibrarian(book1);
+        bookDAO.addBookInLibrarian(book2);
+        bookDAO.addBookInLibrarian(book3);
+        bookDAO.addBookInLibrarian(book4);
+        bookDAO.addBookInLibrarian(book5);
+        bookDAO.addBookInLibrarian(book6);
+        //bookDAO.addBookInLibrarian(book7);
+        //bookDAO.addBookInLibrarian(book8);
+        //bookDAO.addBookInLibrarian(book9);
+        //bookDAO.addBookInLibrarian(book10);
+        //bookDAO.addBookInLibrarian(book10);
+        System.out.println(Arrays.toString(bookDAO.viewBook()));
 
-        librarianDAO.deleteBook(book5);
-        System.out.println();
-        System.out.println(Arrays.toString(librarianDAO.viewBook()));
 
 
     }

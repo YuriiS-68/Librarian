@@ -1,6 +1,6 @@
 package librarian_book;
 
-public class LibrarianDAO {
+public class BookDAO {
 
     public Book[] librarian = new Book[10];
 
@@ -27,18 +27,6 @@ public class LibrarianDAO {
             index++;
         }
         throw new Exception("Can not save book " + book.getId());
-    }
-
-    public void deleteBook(Book book)throws Exception{
-        if (book == null)
-            throw new Exception("Such an object does not exist" );
-
-        int index = 0;
-        for (Book book1 : librarian) {
-            if (book1 != null && book1.equals(book)) {
-                librarian[index] = null;
-            }
-        }
     }
 
     public Book[] viewBook()throws Exception{
