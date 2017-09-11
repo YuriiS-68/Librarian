@@ -93,6 +93,22 @@ public class BookDAO {
         throw new Exception("Can not issue book " + book.getId());
     }
 
+    public Book returnBook(Book book)throws Exception{
+        if (book == null)
+            throw new Exception("Such an object does not exist" );
+
+        int index = 0;
+        for (Book book1 : librarian) {
+            if (book1 != null && book1.equals(book)){
+                librarian[index] = book;
+                book.setBookType(BookType.AVAILABLE);
+                return librarian[index];
+            }
+            index++;
+        }
+        throw new Exception("Can not return book " + book.getId());
+    }
+
     private boolean checkBook(Book book)throws Exception{
         if (book == null)
             throw new Exception("Such an object does not exist" );

@@ -40,6 +40,9 @@ public class Demo {
         System.out.println();
         System.out.println(Arrays.toString(bookDAO.viewIssuedBooksList()));
 
+        bookDAO.returnBook(book2);
+        System.out.println(Arrays.toString(bookDAO.viewBooksList()));
+
 
 
     }
