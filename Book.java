@@ -23,6 +23,30 @@ public class Book {
         this.addedDate = addedDate;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Book book = (Book) o;
+
+        if (id != book.id) return false;
+        if (!callNumber.equals(book.callNumber)) return false;
+        if (!name.equals(book.name)) return false;
+        if (!author.equals(book.author)) return false;
+        return publisher.equals(book.publisher);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (id ^ (id >>> 32));
+        result = 31 * result + callNumber.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + author.hashCode();
+        result = 31 * result + publisher.hashCode();
+        return result;
+    }
+
     public long getId() {
         return id;
     }

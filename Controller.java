@@ -1,14 +1,17 @@
 package librarian_book;
 
 public class Controller {
+    //проверить свободное место в библиотеке
+    //проверить есть ли уже в библиотеке такая книга
+    //добавляем книгу
     public void addBooks(Book book)throws Exception{
         if (book == null)
             throw new Exception("Such an object does not exist" );
 
     }
 
-    public void viewBook(Librarian[] librarians, Book book)throws Exception{
-        if (librarians == null || book == null)
+    public void viewBook(Librarian[] librarians)throws Exception{
+        if (librarians == null)
             throw new Exception("Such an object does not exist" );
 
     }
