@@ -9,11 +9,6 @@ public class BookDAO {
         return libraryBooks;
     }
 
-    public Student[] studentBooks = new Student[5];
-    public Student[] getStudentBooks() {
-        return studentBooks;
-    }
-
     public Book addBookInLibrarian(Book book)throws Exception{
         if (book == null)
             throw new Exception("Such an object does not exist" );
@@ -81,37 +76,37 @@ public class BookDAO {
         return result;
     }
 
-    public Book issueBook(Book book, Student student)throws Exception{
-        if (book == null && student == null)
+    public Book issueBook(Book book, Student idStudent)throws Exception{
+        if (book == null || idStudent == null)
             throw new Exception("Such an object does not exist" );
 
         if (checkBook(book))
             throw new Exception("Can not be issued. The book " + book.getId() + " not exist");
 
-        if (checkStudent(student))
-            throw new Exception("Can not be issued. The book " + book.getId() + " not exist");
-
-        if (checkBookOnStudent(book))
-            throw new Exception("Can not be issued. The book " + book.getId() + " already issued.");
+        if (checkBookStudent(book))
+            throw new Exception("Can not be saved. The book " + book.getId() + " already exists");
 
         int index = 0;
-        for (Book book1 : libraryBooks) {
-            if (book1 != null && book1.equals(book)){
+        for (Book book2 : libraryBooks) {
+            if (book2 != null && book2.equals(book)){
                     libraryBooks[index] = book;
                     book.setBookType(BookType.ISSUED);
                     book.setIssuedDate(new Date());
+
                     return libraryBooks[index];
             }
             index++;
         }
 
-        for (int i = 0; i < libraryBooks.length; i++) {
-            for (int j = 0; j < studentBooks.length; j++) {
-                if (libraryBooks[i].equals(book) && studentBooks[j] == null){
-                    //studentBooks[j] = libraryBooks[i];
-                }
+        Book[] studentBooks = new Book[5];
+        for (Book book1 : studentBooks){
+            if (book1 == null){
+                studentBooks[index] = book;
+
             }
         }
+
+
         throw new Exception("Can not issue book " + book.getId());
     }
 
@@ -131,6 +126,20 @@ public class BookDAO {
         throw new Exception("Can not return book " + book.getId());
     }
 
+    private boolean checkBookStudent(Book book)throws Exception{
+        if (book == null)
+            throw new Exception("Such an object does not exist" );
+
+        Book[] studentBooks = new Book[5];
+        int index = 0;
+        for (Book book1 : studentBooks){
+            if (book1 != null && !book1.equals(book)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     private boolean checkBook(Book book)throws Exception{
         if (book == null)
             throw new Exception("Such an object does not exist" );
@@ -138,34 +147,6 @@ public class BookDAO {
         int index = 0;
         for (Book book1 : libraryBooks) {
             if (book1 != null && book1.equals(book)){
-                return false;
-            }
-            index++;
-        }
-        return true;
-    }
-
-    private boolean checkStudent(Student student)throws Exception{
-        if (student == null)
-            throw new Exception("Such an object does not exist" );
-
-        int index = 0;
-        for (Student student1 : studentBooks) {
-            if (student1 != null && student1.equals(student)){
-                return false;
-            }
-            index++;
-        }
-        return true;
-    }
-
-    private boolean checkBookOnStudent(Book book)throws Exception{
-        if (book == null || studentBooks == null)
-            throw new Exception("Such an object does not exist" );
-
-        int index = 0;
-        for (Student student1 : studentBooks) {
-            if (student1 != null && !student1.equals(book)){
                 return false;
             }
             index++;

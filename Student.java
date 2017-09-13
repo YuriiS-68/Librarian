@@ -1,16 +1,20 @@
 package librarian_book;
 
+import java.util.Arrays;
+
 public class Student {
     private String bookCallNo;
-    private long id;
+    private long idStudent;
     private String name;
     private String contact;
+    private Book[] studentBooks;
 
-    public Student(long id, String name, String bookCallNo, String contact) {
+    public Student(String bookCallNo, long idStudent, String name, String contact, Book[] studentBooks) {
         this.bookCallNo = bookCallNo;
-        this.id = id;
+        this.idStudent = idStudent;
         this.name = name;
         this.contact = contact;
+        this.studentBooks = studentBooks;
     }
 
     @Override
@@ -20,32 +24,49 @@ public class Student {
 
         Student student = (Student) o;
 
-        if (id != student.id) return false;
+        if (idStudent != student.idStudent) return false;
         return name.equals(student.name);
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = (int) (idStudent ^ (idStudent >>> 32));
         result = 31 * result + name.hashCode();
         return result;
     }
 
-    public long getId() {
-        return id;
+    public long getIdStudent() {
+        return idStudent;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setIdStudent(long idStudent) {
+        this.idStudent = idStudent;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Book[] getStudentBooks() {
+        return studentBooks;
+    }
+
+    public void setStudentBooks(Book[] studentBooks) {
+        this.studentBooks = studentBooks;
     }
 
     @Override
     public String toString() {
         return "Student{" +
                 "bookCallNo='" + bookCallNo + '\'' +
-                ", id=" + id +
+                ", id=" + idStudent +
                 ", name='" + name + '\'' +
                 ", contact='" + contact + '\'' +
+                ", studentBooks=" + Arrays.toString(studentBooks) +
                 '}';
     }
 }
