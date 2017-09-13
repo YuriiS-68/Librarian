@@ -14,10 +14,10 @@ public class BookDAO {
             throw new Exception("Such an object does not exist" );
 
         if (checkIsFull() == 0)
-            throw new Exception("Can not save book " + book.getId() + " libraryBooks is full");
+            throw new Exception("Can not save book " + book.getIdBook() + " libraryBooks is full");
 
         if (!checkBook(book))
-            throw new Exception("Can not be saved. The book " + book.getId() + " already exists");
+            throw new Exception("Can not be saved. The book " + book.getIdBook() + " already exists");
 
         int index = 0;
         for (Book book1 : libraryBooks) {
@@ -29,7 +29,7 @@ public class BookDAO {
             }
             index++;
         }
-        throw new Exception("Can not save book " + book.getId());
+        throw new Exception("Can not save book " + book.getIdBook());
     }
 
     public Book[] viewBooksList()throws Exception{
@@ -81,33 +81,30 @@ public class BookDAO {
             throw new Exception("Such an object does not exist" );
 
         if (checkBook(book))
-            throw new Exception("Can not be issued. The book " + book.getId() + " not exist");
+            throw new Exception("Can not be issued. The book " + book.getIdBook() + " not exist");
 
-        if (checkBookStudent(book))
-            throw new Exception("Can not be saved. The book " + book.getId() + " already exists");
+        if (checkBookStudent(book, idStudent))
+            throw new Exception("Can not be saved. The book " + book.getIdBook() + " already exists");
 
         int index = 0;
-        for (Book book2 : libraryBooks) {
-            if (book2 != null && book2.equals(book)){
+        for (Book book1 : libraryBooks) {
+            if (book1 != null && book1.equals(book)){
                     libraryBooks[index] = book;
                     book.setBookType(BookType.ISSUED);
                     book.setIssuedDate(new Date());
-
+                    book.setStudent(idStudent);
                     return libraryBooks[index];
             }
             index++;
         }
 
-        Book[] studentBooks = new Book[5];
-        for (Book book1 : studentBooks){
+        for (Book book1 : idStudent.getStudentBooks())
             if (book1 == null){
-                studentBooks[index] = book;
-
+            idStudent.getStudentBooks()[index] = book;
+            idStudent.setIdBook(book);
+            break;
             }
-        }
-
-
-        throw new Exception("Can not issue book " + book.getId());
+        throw new Exception("Can not issue book " + book.getIdBook());
     }
 
     public Book returnBook(Book book)throws Exception{
@@ -123,16 +120,15 @@ public class BookDAO {
             }
             index++;
         }
-        throw new Exception("Can not return book " + book.getId());
+        throw new Exception("Can not return book " + book.getIdBook());
     }
 
-    private boolean checkBookStudent(Book book)throws Exception{
-        if (book == null)
+    private boolean checkBookStudent(Book book, Student student)throws Exception{
+        if (book == null || student == null)
             throw new Exception("Such an object does not exist" );
 
-        Book[] studentBooks = new Book[5];
         int index = 0;
-        for (Book book1 : studentBooks){
+        for (Book book1 : student.getStudentBooks()){
             if (book1 != null && !book1.equals(book)){
                 return false;
             }

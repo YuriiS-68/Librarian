@@ -3,7 +3,7 @@ package librarian_book;
 import java.util.Date;
 
 public class Book {
-    private long id;
+    private long idBook;
     private String callNumber;
     private String name;
     private String author;
@@ -11,10 +11,10 @@ public class Book {
     private BookType bookType;
     private Date addedDate;
     private Date issuedDate;
-    //private Student student;
+    private Student student;
 
-    public Book(long id, String callNumber, String name, String author, String publisher, BookType bookType, Date addedDate, Date issuedDate) {
-        this.id = id;
+    public Book(long idBook, String callNumber, String name, String author, String publisher, BookType bookType, Date addedDate, Date issuedDate, Student student) {
+        this.idBook = idBook;
         this.callNumber = callNumber;
         this.name = name;
         this.author = author;
@@ -22,46 +22,23 @@ public class Book {
         this.bookType = bookType;
         this.addedDate = addedDate;
         this.issuedDate = issuedDate;
+        this.student = student;
     }
 
-    public long getId() {
-        return id;
+    public Student getStudent() {
+        return student;
     }
 
-    public void setId(long id) {
-        this.id = id;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 
-    public String getCallNumber() {
-        return callNumber;
+    public long getIdBook() {
+        return idBook;
     }
 
-    public void setCallNumber(String callNumber) {
-        this.callNumber = callNumber;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public String getPublisher() {
-        return publisher;
-    }
-
-    public void setPublisher(String publisher) {
-        this.publisher = publisher;
+    public void setIdBook(long idBook) {
+        this.idBook = idBook;
     }
 
     public BookType getBookType() {
@@ -91,7 +68,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "id=" + id +
+                "idBook=" + idBook +
                 ", callNumber='" + callNumber + '\'' +
                 ", name='" + name + '\'' +
                 ", author='" + author + '\'' +
@@ -99,6 +76,7 @@ public class Book {
                 ", bookType=" + bookType +
                 ", addedDate=" + addedDate +
                 ", issuedDate=" + issuedDate +
+                ", student=" + student +
                 '}';
     }
 }

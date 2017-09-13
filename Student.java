@@ -8,13 +8,15 @@ public class Student {
     private String name;
     private String contact;
     private Book[] studentBooks;
+    private Book idBook;
 
-    public Student(String bookCallNo, long idStudent, String name, String contact, Book[] studentBooks) {
+    public Student(String bookCallNo, long idStudent, String name, String contact, Book[] studentBooks, Book idBook) {
         this.bookCallNo = bookCallNo;
         this.idStudent = idStudent;
         this.name = name;
         this.contact = contact;
         this.studentBooks = studentBooks;
+        this.idBook = idBook;
     }
 
     @Override
@@ -37,6 +39,14 @@ public class Student {
 
     public long getIdStudent() {
         return idStudent;
+    }
+
+    public Book getIdBook() {
+        return idBook;
+    }
+
+    public void setIdBook(Book idBook) {
+        this.idBook = idBook;
     }
 
     public void setIdStudent(long idStudent) {
@@ -63,7 +73,7 @@ public class Student {
     public String toString() {
         return "Student{" +
                 "bookCallNo='" + bookCallNo + '\'' +
-                ", id=" + idStudent +
+                ", idBook=" + idStudent +
                 ", name='" + name + '\'' +
                 ", contact='" + contact + '\'' +
                 ", studentBooks=" + Arrays.toString(studentBooks) +
