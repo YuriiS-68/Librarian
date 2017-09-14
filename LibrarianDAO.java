@@ -2,7 +2,7 @@ package librarian_book;
 
 public class LibrarianDAO {
 
-    public Librarian[] librarians = new Librarian[5];
+    public Librarian[] librarians = new Librarian[3];
 
     public Librarian[] getLibrarians() {
         return librarians;
@@ -43,7 +43,6 @@ public class LibrarianDAO {
             }
             index++;
         }
-        throw new Exception("Can not deleted librarian " + librarian.getId());
     }
 
     public Librarian[] viewLibrarianList()throws Exception{
@@ -62,8 +61,8 @@ public class LibrarianDAO {
         for (Librarian el : librarians) {
             if (el != null){
                 result[index] = el;
+                index++;
             }
-            index++;
         }
         return result;
     }
