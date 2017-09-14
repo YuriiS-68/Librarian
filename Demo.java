@@ -35,10 +35,18 @@ public class Demo {
         bookDAO.addBookInLibrarian(book9);
         bookDAO.addBookInLibrarian(book10);
         System.out.println(Arrays.toString(bookDAO.viewBooksList()));
+
         System.out.println();
+
         bookDAO.issueBook(book1, student2);
         bookDAO.issueBook(book2, student1);
         System.out.println(Arrays.toString(bookDAO.viewIssuedBooksList()));
+
+        System.out.println();
+
+        bookDAO.returnBook(book1, student2);
+        System.out.println(Arrays.toString(bookDAO.viewIssuedBooksList()));
+        System.out.println(Arrays.toString(bookDAO.viewBooksList()));
 
 
     }

@@ -110,6 +110,9 @@ public class BookDAO {
         if (book == null || student == null)
             throw new Exception("Such an object does not exist" );
 
+        if (checkBookStudent(book, student))
+            throw new Exception("Can not return book " + book.getIdBook() + " The " + student.getName() + " has no such book.");
+
         int index = 0;
         for (Book book1 : libraryBooks) {
             if (book1 != null && book1.equals(book)){
@@ -127,7 +130,7 @@ public class BookDAO {
 
         int index = 0;
         for (Book book1 : student.getStudentBooks()){
-            if (book1 != null && book1.equals(book)){
+            if (book1 != null && book1.equals(book) && book.getStudent().equals(student)){
                 return false;
             }
         }
