@@ -76,7 +76,7 @@ public class BookDAO {
         return result;
     }
 
-    public void issueBook(Book book, Student student)throws Exception{
+    public Book issueBook(Book book, Student student)throws Exception{
         if (book == null || student == null)
             throw new Exception("Such an object does not exist" );
 
@@ -90,18 +90,20 @@ public class BookDAO {
             if (libraryBooks[i] != null && libraryBooks[i].equals(book)){
                 libraryBooks[i].setBookType(BookType.ISSUED);
                 libraryBooks[i].setIssuedDate(new Date());
-                libraryBooks[i].setStudent(student);
                 for (int j = 0; j < student.getStudentBooks().length; j++) {
                     if (student.getStudentBooks()[j] == null){
                         student.getStudentBooks()[j] = book;
-                        break;
+                        book.setStudent(student);
+                        System.out.println("Book with id - " + book.getIdBook() + " issued successfully to student - " + student.getName());
+                        return libraryBooks[i];
                     }
                 }
-                System.out.println("Book with id - " + book.getIdBook() + " issued successfully.");
-            }else if (libraryBooks[i] != null && libraryBooks[i].getBookType() == BookType.ISSUED){
+            }else
+                if (libraryBooks[i] != null && libraryBooks[i].getBookType() == BookType.ISSUED && libraryBooks[i].equals(book)){
                 System.out.println("Book with id - " + book.getIdBook() + " is not available now.");
             }
         }
+        throw new Exception("Failed to issue book with id - " + book.getIdBook());
     }
 
     public void returnBook(Book book, Student student)throws Exception{
@@ -112,10 +114,11 @@ public class BookDAO {
         for (Book book1 : libraryBooks) {
             if (book1 != null && book1.equals(book)){
                 book.setBookType(BookType.AVAILABLE);
-
+                book.getStudent().setIdStudent(0);
             }
             index++;
         }
+        System.out.println("Book with id - " + book.getIdBook() + " was returned by the student " + student.getName());
     }
 
     private boolean checkBookStudent(Book book, Student student)throws Exception{
