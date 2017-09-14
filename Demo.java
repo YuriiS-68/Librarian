@@ -8,7 +8,8 @@ public class Demo {
 
         Book[] libraryStudent = new Book[5];
 
-        Student student1 = new Student("K8", 01, "student1", "909111", libraryStudent, );
+        Student student1 = new Student("K8", 01, "student1", "909111", libraryStudent);
+        Student student2 = new Student("U5", 02, "student2", "909222", libraryStudent);
 
         BookDAO bookDAO = new BookDAO();
 
@@ -22,6 +23,14 @@ public class Demo {
         Book book8 = new Book(8, "909", "name8", "author8", "publisher8", BookType.AVAILABLE, new Date(), new Date(), student1);
         Book book9 = new Book(9, "909", "name9", "author9", "publisher9", BookType.AVAILABLE, new Date(), new Date(), student1);
         Book book10 = new Book(10, "909", "name10", "author10", "publisher10", BookType.AVAILABLE, new Date(), new Date(), student1);
+
+        bookDAO.addBookInLibrarian(book1);
+        bookDAO.addBookInLibrarian(book2);
+        System.out.println(Arrays.toString(bookDAO.viewBooksList()));
+        System.out.println();
+        bookDAO.issueBook(book1, student2);
+        bookDAO.issueBook(book2, student1);
+        System.out.println(Arrays.toString(bookDAO.viewIssuedBooksList()));
 
 
     }

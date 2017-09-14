@@ -76,51 +76,46 @@ public class BookDAO {
         return result;
     }
 
-    public Book issueBook(Book book, Student idStudent)throws Exception{
-        if (book == null || idStudent == null)
+    public void issueBook(Book book, Student student)throws Exception{
+        if (book == null || student == null)
             throw new Exception("Such an object does not exist" );
 
         if (checkBook(book))
             throw new Exception("Can not be issued. The book " + book.getIdBook() + " not exist");
 
-        if (checkBookStudent(book, idStudent))
+        if (!checkBookStudent(book, student))
             throw new Exception("Can not be saved. The book " + book.getIdBook() + " already exists");
 
-        int index = 0;
-        for (Book book1 : libraryBooks) {
-            if (book1 != null && book1.equals(book)){
-                    libraryBooks[index] = book;
-                    book.setBookType(BookType.ISSUED);
-                    book.setIssuedDate(new Date());
-                    book.setStudent(idStudent);
-                    return libraryBooks[index];
+        for (int i = 0; i < libraryBooks.length; i++) {
+            if (libraryBooks[i] != null && libraryBooks[i].equals(book)){
+                libraryBooks[i].setBookType(BookType.ISSUED);
+                libraryBooks[i].setIssuedDate(new Date());
+                libraryBooks[i].setStudent(student);
+                for (int j = 0; j < student.getStudentBooks().length; j++) {
+                    if (student.getStudentBooks()[j] == null){
+                        student.getStudentBooks()[j] = book;
+                        break;
+                    }
+                }
+                System.out.println("Book with id - " + book.getIdBook() + " issued successfully.");
+            }else if (libraryBooks[i] != null && libraryBooks[i].getBookType() == BookType.ISSUED){
+                System.out.println("Book with id - " + book.getIdBook() + " is not available now.");
             }
-            index++;
         }
-
-        for (Book book1 : idStudent.getStudentBooks())
-            if (book1 == null){
-            idStudent.getStudentBooks()[index] = book;
-            idStudent.setIdBook(book);
-            break;
-            }
-        throw new Exception("Can not issue book " + book.getIdBook());
     }
 
-    public Book returnBook(Book book)throws Exception{
-        if (book == null)
+    public void returnBook(Book book, Student student)throws Exception{
+        if (book == null || student == null)
             throw new Exception("Such an object does not exist" );
 
         int index = 0;
         for (Book book1 : libraryBooks) {
             if (book1 != null && book1.equals(book)){
-                libraryBooks[index] = book;
                 book.setBookType(BookType.AVAILABLE);
-                return libraryBooks[index];
+
             }
             index++;
         }
-        throw new Exception("Can not return book " + book.getIdBook());
     }
 
     private boolean checkBookStudent(Book book, Student student)throws Exception{
