@@ -124,7 +124,7 @@ public class BookDAO {
 
         int index = 0;
         for (Book book1 : student.getStudentBooks()){
-            if (book1 != null && !book1.equals(book)){
+            if (book1 != null && book1.equals(book)){
                 return false;
             }
         }
