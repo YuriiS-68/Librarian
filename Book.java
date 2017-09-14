@@ -22,7 +22,7 @@ public class Book {
         this.bookType = bookType;
         this.addedDate = addedDate;
         this.issuedDate = issuedDate;
-        this.student = student;
+        this.student = null;
     }
 
     public Student getStudent() {

@@ -117,7 +117,7 @@ public class BookDAO {
         for (Book book1 : libraryBooks) {
             if (book1 != null && book1.equals(book)){
                 book.setBookType(BookType.AVAILABLE);
-                book.getStudent().setIdStudent(0);
+                book.setStudent(null);
             }
             index++;
         }
