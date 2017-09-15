@@ -6,11 +6,11 @@ import java.util.Date;
 public class Demo {
     public static void main(String[] args)throws Exception {
 
-        LibrarianDAO librarianDAO = new LibrarianDAO();
-        Librarian librarian1 = new Librarian(01, "librarian1", "1111", "1@email", "address1", "city1", "101");
-        Librarian librarian2 = new Librarian(02, "librarian2", "2222", "2@email", "address2", "city2", "202");
-        Librarian librarian3 = new Librarian(03, "librarian3", "3333", "3@email", "address3", "city3", "303");
-        Librarian librarian = new Librarian(00, "librarian", "0000", "0@email", "address", "city", "000");
+        UserDAO userDAO = new UserDAO();
+        User librarian1 = new User(01, "librarian1", "1111", "1@email", "address1", "city1", "101", UserType.LIBRARIAN);
+        User librarian2 = new User(02, "librarian2", "2222", "2@email", "address2", "city2", "202", UserType.LIBRARIAN);
+        User librarian3 = new User(03, "librarian3", "3333", "3@email", "address3", "city3", "303", UserType.LIBRARIAN);
+        User librarian = new User(00, "admin", "0000", "0@email", "address", "city", "000", UserType.ADMIN);
 
         Book[] libraryStudent = new Book[5];
         Student student1 = new Student("K8", 01, "student1", "909111", libraryStudent);
@@ -54,20 +54,25 @@ public class Demo {
 
         System.out.println();
 
-        librarianDAO.addLibrarian(librarian1);
-        librarianDAO.addLibrarian(librarian2);
-        librarianDAO.addLibrarian(librarian3);
-        System.out.println(Arrays.toString(librarianDAO.viewLibrarianList()));
+        userDAO.addLibrarian(librarian1);
+        userDAO.addLibrarian(librarian2);
+        userDAO.addLibrarian(librarian3);
+        System.out.println(Arrays.toString(userDAO.viewLibrarianList()));
 
         System.out.println();
 
-        librarianDAO.deleteLibrarian(librarian2);
-        System.out.println(Arrays.toString(librarianDAO.viewLibrarianList()));
+        userDAO.deleteLibrarian(librarian2);
+        System.out.println(Arrays.toString(userDAO.viewLibrarianList()));
 
         System.out.println();
 
-        librarianDAO.deleteLibrarian(librarian1);
-        librarianDAO.deleteLibrarian(librarian3);
-        System.out.println(Arrays.toString(librarianDAO.viewLibrarianList()));
+        userDAO.deleteLibrarian(librarian1);
+        userDAO.deleteLibrarian(librarian3);
+        System.out.println(Arrays.toString(userDAO.viewLibrarianList()));
+
+        System.out.println();
+
+        userDAO.addLibrarian(librarian);
+        System.out.println(Arrays.toString(userDAO.viewLibrarianList()));
     }
 }

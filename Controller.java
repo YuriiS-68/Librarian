@@ -10,8 +10,8 @@ public class Controller {
 
     }
 
-    public void viewBook(Librarian[] librarians)throws Exception{
-        if (librarians == null)
+    public void viewBook(User[] user)throws Exception{
+        if (user == null)
             throw new Exception("Such an object does not exist" );
 
     }
